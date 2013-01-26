@@ -30,6 +30,7 @@ module Miri
           end
         else
           index += 1
+          chunk_array[index] = word
         end
 
       end
