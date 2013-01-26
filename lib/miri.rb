@@ -7,15 +7,18 @@ module Miri
   require ROOT + '/miri/text_to_speech' 	
 
   class Agent
-    def capture_audio
+    def capture_audio()
       Logger.info("In capture_audio")
+      audio_recorder = Miri::AudioRecorder.new()
+      audio_file = audio_recorder.record
+      return audio_file
     end
 
     def translate_to_text(audio_file)
       speech_to_text = Miri::SpeechToText.new(audio_file) 
       translated_text = speech_to_text.text
       Logger.info("Result of speech_to_text is #{translated_text}")
-      translated_text
+      return translated_text
     end
 
     def perform_action(translated_text)
