@@ -12,6 +12,7 @@ module Miri
 
   class Agent
     def capture_audio()
+      Miri::TextToSpeech.say("How can I help?")
       Logger.info("In capture_audio")
       audio_recorder = Miri::AudioRecorder.new()
       audio_file = audio_recorder.record

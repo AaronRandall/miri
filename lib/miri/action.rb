@@ -1,7 +1,7 @@
 module Miri
   module Action
     class BaseAction
-      def process
+      def process(artist_text)
         raise NotImplementedError
       end
 
@@ -22,7 +22,7 @@ module Miri
 
         Logger.info("Action class retrieved: #{action_class}")
         Logger.info("Artist text retrieved : #{artist_text}")
-        action_class.process if action_class
+        action_class.process(artist_text) if action_class
       end
 
       private
