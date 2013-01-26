@@ -5,10 +5,8 @@ module Miri
     OUTPUT_DIR="/home/pi/src/miri/output"
     
     def record
-      record_output = `arecord -d #{RECORD_DURATION} -D hw:1,0 -f S16_LE -c 1 -r #{RECORD_SAMPLE_RATE} #{OUTPUT_DIR}/output.wav`
-      Logger.info("record_output=#{record_output}")
-      conversion_output = `ffmpeg -i #{OUTPUT_DIR}/output.wav -ab 192k -y #{OUTPUT_DIR}/output.flac`
-      Logger.info("conversion_output=#{conversion_output}")
+      recording_output = `arecord -d #{RECORD_DURATION} -D hw:1,0 -f S16_LE -c 1 -r #{RECORD_SAMPLE_RATE} #{OUTPUT_DIR}/output.wav > /dev/null`
+      conversion_output = `ffmpeg -loglevel 0 -v 0 -i #{OUTPUT_DIR}/output.wav -ab 192k -y #{OUTPUT_DIR}/output.flac > /dev/null 2> /dev/null`
 
       return "#{OUTPUT_DIR}/output.flac"
     end
