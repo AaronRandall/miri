@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../../lib/miri', __FILE__)
+
+miri = Miri::Agent.new()
+
+audio_file      = miri.capture_audio()
+
+audio_file = "/home/pi/src/miri/output/output.flac"
+translated_text = miri.translate_to_text(audio_file)
+action_result   = miri.perform_action(translated_text)
+miri.report_results(action_result)
+
+Logger.info("Exiting")
