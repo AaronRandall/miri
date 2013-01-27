@@ -7,7 +7,9 @@ module Miri
       
       def process(artist_text)
         @artist_text = artist_text
+
         Logger.debug("In Spotify process with #{artist_text}")
+        ensure_mpd_is_running
         play_track_for_artist
       end
 
@@ -45,6 +47,18 @@ module Miri
 
       def clear_playlist
         `mpc clear`
+      end
+
+      def ensure_mpd_is_running
+        # Attempt to get the mpd process id
+        mpd_pid = `ps -C mopidy -o pid=`
+
+        Logger.debug("mpd_pid: #{mpd_pid}")
+        # If no pid exists, start the mpd
+        if mpd_pid.strip == ""
+          Logger.info("No MPD server running, starting one now. Please rerun your query.")
+          `/usr/bin/mopidy &`
+        end
       end
     end
   end
