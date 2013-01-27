@@ -4,6 +4,9 @@ require 'json'
 module Miri
   module Action
     class Songkick < BaseAction
+      
+      SONGKICK_USER_ID="aaronrandall"
+
       def process(artist_text)
         Logger.debug("In the Songkick action")
         event = perform_query
@@ -29,7 +32,7 @@ module Miri
       private
 
       def perform_query
-        uri = URI("http://api.songkick.com/api/3.0/users/aaronrandall/events.json?apikey=hackday")
+        uri = URI("http://api.songkick.com/api/3.0/users/#{SONGKICK_USER_ID}/events.json?apikey=hackday")
         response = Net::HTTP.get_response(uri)
 
         begin

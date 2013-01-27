@@ -13,15 +13,14 @@ module Miri
   require ROOT + '/miri/action/musicbrainz' 	
   require ROOT + '/miri/action/wolframalpha' 	
 
-  MIN_SPEECH_TO_TEXT_CONFIDENCE = 0.5
   SOUNDS_DIR = ROOT + "/../sounds"
   SOUNDS_OUTPUT_DIR = SOUNDS_DIR + "/output"
+  MIN_SPEECH_TO_TEXT_CONFIDENCE = 0.5
   Logger::SHOW_DEBUG = false
 
   class Agent
     def capture_audio
       Miri::AudioPlayer.play("miri_start.mp3")
-      Logger.debug("In capture_audio")
       audio_recorder = Miri::AudioRecorder.new()
       audio_file = audio_recorder.record
       Miri::AudioPlayer.play("miri_end.mp3")
@@ -37,14 +36,13 @@ module Miri
 
       if speech_to_text.confidence < MIN_SPEECH_TO_TEXT_CONFIDENCE
         Miri::TextToSpeech.say("I'm sorry, I couldn't hear that.")
-        return ""
+        translated_text = ""
       end
 
       return translated_text
     end
 
     def perform_action(translated_text)
-      Logger.debug("In perform_action (translated_text=#{translated_text})")
       action = Miri::Action::Agent.new(translated_text)
       action.process if action
     end

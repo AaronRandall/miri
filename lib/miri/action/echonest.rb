@@ -35,10 +35,7 @@ module Miri
 
         # Limit the bio by sentence count and max length
         bio = bio.split('.')[0..BIO_MAX_SENTENCES].join('.')
-        puts "* split: " + bio
         bio = bio[0..BIO_MAX_LENGTH_CHARS] 
-        puts "* limited: " + bio
-        bio
       end
     end
   end

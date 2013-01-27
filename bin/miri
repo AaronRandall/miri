@@ -8,7 +8,7 @@ MAX_ATTEMPTS=2
 translated_text = ""
 current_attempt = 1
 
-translated_text = "tell me about the rolling stones"
+#translated_text = "tell me about the rolling stones"
 #translated_text = "tell me about eric clapton"
 #translated_text = "play a track by the rolling stones"
 #translated_text = "what is my next gig"
