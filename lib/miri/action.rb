@@ -29,6 +29,7 @@ module Miri
           artist_text = @action_text
         end
 
+        Logger.info("I'm going to use #{action_class.class.name.split('::').last} to answer your question")
         action_class.process(artist_text)
       end
 

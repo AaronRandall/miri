@@ -14,7 +14,7 @@ module Miri
       end
 
       def keywords
-        [ 'what is' ]
+        [ '' ]
       end
 
       private

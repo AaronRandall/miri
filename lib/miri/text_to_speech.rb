@@ -29,8 +29,8 @@ module Miri
         # Wait for all text-to-speech threads to complete before continuing
         thread_array.each { |thread| thread.join }
 
-        # Play all chunks in order
-        Miri::AudioPlayer.play("chunk_*.mp3", SOUNDS_OUTPUT_DIR)
+        # Play all chunks in order (and slightly faster than a non-chunked message)
+        Miri::AudioPlayer.play("chunk_*.mp3", SOUNDS_OUTPUT_DIR, 1.1)
       else
         Logger.debug("Playing directly with Mplayer")
         Logger.debug("Chunked message: #{chunked_message[0]}")

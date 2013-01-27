@@ -16,14 +16,15 @@ module Miri
   MIN_SPEECH_TO_TEXT_CONFIDENCE = 0.5
   SOUNDS_DIR = ROOT + "/../sounds"
   SOUNDS_OUTPUT_DIR = SOUNDS_DIR + "/output"
-  Logger::SHOW_DEBUG = true
+  Logger::SHOW_DEBUG = false
 
   class Agent
     def capture_audio
-      Miri::AudioPlayer.play("siri_beep.mp3")
+      Miri::AudioPlayer.play("miri_start.mp3")
       Logger.debug("In capture_audio")
       audio_recorder = Miri::AudioRecorder.new()
       audio_file = audio_recorder.record
+      Miri::AudioPlayer.play("miri_end.mp3")
       return audio_file
     end
 
