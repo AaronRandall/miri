@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+NOISE_SAMPLE_RATE = 0.02
+RECORD_RATE_SECONDS = 1
+
+while true
+  mean_sample_rate_string = `/usr/bin/arecord -D plughw:1,0 -d #{RECORD_RATE_SECONDS} -f S16_LE > sample.wav && /usr/bin/sox -t .wav sample.wav -n stat 2>&1 | grep norm`
+  mean_sample_rate = mean_sample_rate_string.split[2].to_f
+  puts "Mean sample rate=#{mean_sample_rate}"
+  if mean_sample_rate > NOISE_SAMPLE_RATE
+    system "/home/pi/src/miri/bin/miri"
+  end
+end
