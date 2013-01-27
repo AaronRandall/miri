@@ -8,8 +8,7 @@ module Miri
 
       def process(artist_text)
         @artist_text = artist_text
-        Logger.info("In EchoNest process")
-        Miri::TextToSpeech.say("Hello, i'm in echo nest with #{@artist_text}")
+        Logger.info("In EchoNest process with #{@artist_text}")
         bio = perform_query
         Logger.info("Bio retrieved: #{bio}")
 
