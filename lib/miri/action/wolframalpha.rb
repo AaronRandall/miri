@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'nokogiri'
 
 module Miri
   module Action
@@ -9,7 +10,7 @@ module Miri
         Logger.debug("In the WolframAlpha action with search term: #{@search_text}")
         result = perform_query
 
-        #Miri::TextToSpeech.say(result)
+        Miri::TextToSpeech.say(result)
       end
 
       def keywords
@@ -19,18 +20,22 @@ module Miri
       private
 
       def perform_query
-        uri = URI("http://api.wolframalpha.com/v2/query?input=what%20is%20the%20biggest%20mammal%20on%20earth&appid=U3TR8A-553KQ7G3RK")
+        result = ""
+
+        uri = URI("http://api.wolframalpha.com/v2/query?input=#{URI.escape(@search_text)}&appid=U3TR8A-553KQ7G3RK")
         response = Net::HTTP.get_response(uri)
 
         Logger.debug(response)
         begin
-          result = Hash.from_xml(response.body).to_json
-
+          xml_doc  = Nokogiri::XML(response.body)
+          result = xml_doc.xpath("//queryresult/pod[@primary='true'][1]/subpod/plaintext/text()").text
           Logger.debug("Result is: #{result}")
         rescue Exception => e
           Logger.error("An error occurred querying WolframAlpha.")
           Logger.error("#{e.message}")
         end
+
+        return result
       end
     end
   end

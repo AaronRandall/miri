@@ -11,6 +11,7 @@ current_attempt = 1
 #translated_text = "tell me about eric clapton"
 #translated_text = "play a track by the rolling stones"
 #translated_text = "what is my next gig"
+#translated_text = "what is the largest mammal on earth"
 
 while translated_text == "" && current_attempt <= MAX_ATTEMPTS
   audio_file      = miri.capture_audio()

@@ -23,8 +23,13 @@ module Miri
 
           Logger.debug("Action class retrieved: #{action_class}")
           Logger.debug("Artist text retrieved : #{artist_text}")
-          action_class.process(artist_text) if action_class
+        else
+          # Try the request on WolframAlpha if no specific action class was found
+          action_class = Miri::Action::WolframAlpha.new
+          artist_text = @action_text
         end
+
+        action_class.process(artist_text)
       end
 
       private

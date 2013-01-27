@@ -2,7 +2,7 @@ module Miri
   module Action
     class Spotify < BaseAction
   
-      PREVIEW_TRACK_SECONDS=0
+      PREVIEW_TRACK_SECONDS=10
       
       def process(artist_text)
         @artist_text = artist_text
