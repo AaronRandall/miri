@@ -4,11 +4,16 @@ require File.expand_path('../../lib/miri', __FILE__)
 
 miri = Miri::Agent.new()
 
-audio_file      = miri.capture_audio()
-#audio_file = '/home/pi/src/miri/output/output.flac'
-translated_text = miri.translate_to_text(audio_file)
-#translated_text = "tell me about eric clapton"
-action_result   = miri.perform_action(translated_text)
-miri.report_results(action_result)
+MAX_ATTEMPTS=2
+translated_text = ""
+current_attempt = 1
 
-Logger.info("Exiting")
+translated_text = "tell me about eric clapton"
+
+while translated_text == "" && current_attempt <= MAX_ATTEMPTS
+  audio_file      = miri.capture_audio()
+  translated_text = miri.translate_to_text(audio_file)
+  current_attempt += 1
+end
+
+action_result = miri.perform_action(translated_text)

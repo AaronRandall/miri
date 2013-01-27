@@ -8,15 +8,15 @@ module Miri
 
       def process(artist_text)
         @artist_text = artist_text
-        Logger.info("In EchoNest process with #{@artist_text}")
+        Logger.debug("In EchoNest process with #{@artist_text}")
         bio = perform_query
-        Logger.info("Bio retrieved: #{bio}")
+        Logger.debug("Bio retrieved: #{bio}")
 
         Miri::TextToSpeech.say(bio)
       end
 
       def keywords
-        ['tell me about', 'tell me more about', 'biography information for']
+        ['tell me about', 'tell me more about', 'biography debugrmation for']
       end
 
       private

@@ -9,8 +9,9 @@ module Miri
       chunked_message = split_into_chunks 
 
       chunked_message.each do |chunk| 
+        # ToDo: Should use Miri::AudioPlayer.play
         command = "mplayer -ao alsa -noconsolecontrols \"http://translate.google.com/translate_tts?tl=en&q=#{chunk}\" > /dev/null 2>&1"
-        Logger.info(command)
+        Logger.debug(command)
         system command
       end
     end

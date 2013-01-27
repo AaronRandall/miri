@@ -18,22 +18,26 @@ module Miri
 
       def process
         action_class = find_action_class
-        artist_text = artist_text_exists_in_action_text(action_class.keywords) 
+        if action_class
+          artist_text = artist_text_exists_in_action_text(action_class.keywords) 
 
-        Logger.info("Action class retrieved: #{action_class}")
-        Logger.info("Artist text retrieved : #{artist_text}")
-        action_class.process(artist_text) if action_class
+          Logger.debug("Action class retrieved: #{action_class}")
+          Logger.debug("Artist text retrieved : #{artist_text}")
+          action_class.process(artist_text) if action_class
+        end
       end
 
       private
 
       def find_action_class
         all_action_classes.each do |current_action_class|
-          Logger.info("Action class keywords: #{current_action_class.keywords}")
+          Logger.debug("Action class keywords: #{current_action_class.keywords}")
           if keyword_exists_in_action_text(current_action_class.keywords)
             return current_action_class
           end
         end
+
+        return nil
       end
 
       def keyword_exists_in_action_text(keywords)
@@ -46,9 +50,9 @@ module Miri
 
       def artist_text_exists_in_action_text(keywords)
         keywords.each do |keyword|
-          Logger.info("Checking keyword #{keyword} against action_text #{@action_text}")
+          Logger.debug("Checking keyword #{keyword} against action_text #{@action_text}")
           if starts_with?(@action_text, keyword)
-            Logger.info("Subtracting @action_text: #{@action_text} from keyword:#{keyword}")
+            Logger.debug("Subtracting @action_text: #{@action_text} from keyword:#{keyword}")
             artist_text = @action_text.gsub(keyword, "")
             return artist_text
           end
