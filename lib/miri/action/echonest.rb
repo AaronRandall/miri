@@ -16,7 +16,7 @@ module Miri
       end
 
       def keywords
-        ['tell me about', 'tell me more about', 'biography debugrmation for']
+        ['tell me about', 'tell me more about', 'biography information for']
       end
 
       private

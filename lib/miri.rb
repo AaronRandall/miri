@@ -12,9 +12,10 @@ module Miri
   require ROOT + '/miri/action/songkick' 	
   require ROOT + '/miri/action/musicbrainz' 	
 
+  MIN_SPEECH_TO_TEXT_CONFIDENCE = 0.5
   SOUNDS_DIR = ROOT + "/../sounds"
   SOUNDS_OUTPUT_DIR = SOUNDS_DIR + "/output"
-  Logger::SHOW_DEBUG=true
+  Logger::SHOW_DEBUG = true
 
   class Agent
     def capture_audio
@@ -32,7 +33,7 @@ module Miri
       Logger.debug("Result of speech_to_text.text is       :#{speech_to_text.text}")
       Logger.debug("Result of speech_to_text.confidence is :#{speech_to_text.confidence}")
 
-      if speech_to_text.confidence < 0.5
+      if speech_to_text.confidence < MIN_SPEECH_TO_TEXT_CONFIDENCE
         Miri::TextToSpeech.say("I'm sorry, I couldn't hear that.")
         return ""
       end
