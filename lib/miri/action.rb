@@ -63,7 +63,9 @@ module Miri
 
       def all_action_classes
         @action_classes ||= [ Miri::Action::EchoNest.new,
-                              Miri::Action::Spotify.new ]
+                              Miri::Action::Spotify.new,
+                              Miri::Action::Songkick.new,
+                              Miri::Action::WolframAlpha.new]
       end
 
       def starts_with?(text, prefix)

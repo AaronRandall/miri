@@ -2,7 +2,7 @@ module Miri
   module Action
     class Spotify < BaseAction
   
-      PREVIEW_TRACK_SECONDS=10
+      PREVIEW_TRACK_SECONDS=0
       
       def process(artist_text)
         @artist_text = artist_text
@@ -13,12 +13,17 @@ module Miri
       def play_track_for_artist
         clear_playlist
         track_uri = find_track
-        Logger.debug("Track found: #{track_uri}")
-        play_track(track_uri)
 
-        if PREVIEW_TRACK_SECONDS > 0
-          sleep PREVIEW_TRACK_SECONDS
-          clear_playlist
+        if track_uri
+          Logger.debug("Track found: #{track_uri}")
+          play_track(track_uri)
+
+          if PREVIEW_TRACK_SECONDS > 0
+            sleep PREVIEW_TRACK_SECONDS
+            clear_playlist
+          end
+        else
+          Miri::TextToSpeech("I'm sorry, I couldn't find a track for #{@artist_text}")
         end
       end
 

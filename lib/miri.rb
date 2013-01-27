@@ -11,6 +11,7 @@ module Miri
   require ROOT + '/miri/action/spotify' 	
   require ROOT + '/miri/action/songkick' 	
   require ROOT + '/miri/action/musicbrainz' 	
+  require ROOT + '/miri/action/wolframalpha' 	
 
   MIN_SPEECH_TO_TEXT_CONFIDENCE = 0.5
   SOUNDS_DIR = ROOT + "/../sounds"
