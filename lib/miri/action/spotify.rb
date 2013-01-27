@@ -2,7 +2,8 @@ module Miri
   module Action
     class Spotify < BaseAction
   
-      PREVIEW_TRACK_SECONDS=10
+      # Set to zero to play entire track
+      PREVIEW_TRACK_SECONDS=0
       
       def process(artist_text)
         @artist_text = artist_text
