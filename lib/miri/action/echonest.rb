@@ -6,6 +6,7 @@ module Miri
     class EchoNest < BaseAction
 
       BIO_MAX_LENGTH_CHARS=500
+      BIO_MAX_SENTENCES=1
 
       def process(artist_text)
         @artist_text = artist_text
@@ -32,7 +33,12 @@ module Miri
           Logger.error("An error occurred retrieving a bio using EchoNest for artist #{@artist_name}")
         end
 
-        bio[0..BIO_MAX_LENGTH_CHARS] 
+        # Limit the bio by sentence count and max length
+        bio = bio.split('.')[0..BIO_MAX_SENTENCES].join('.')
+        puts "* split: " + bio
+        bio = bio[0..BIO_MAX_LENGTH_CHARS] 
+        puts "* limited: " + bio
+        bio
       end
     end
   end

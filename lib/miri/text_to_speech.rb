@@ -17,8 +17,7 @@ module Miri
         thread_array = []
         chunk_index = 1
         chunked_message.each do |chunk| 
-          # ToDo: Should use Miri::AudioPlayer.play
-          command = "wget -q -U Mozilla -O \"#{SOUNDS_OUTPUT_DIR}/chunk_#{chunk_index}.mp3\" \"#{TRANSLATION_URI}#{chunk}'\""
+          command = "wget -q -U Mozilla -O \"#{SOUNDS_OUTPUT_DIR}/chunk_#{chunk_index}.mp3\" \"#{TRANSLATION_URI}#{URI.escape(chunk)}'\""
           Logger.debug(command)
           th = Thread.new { system command; sleep 5 }
 
