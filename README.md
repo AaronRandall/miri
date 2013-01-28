@@ -5,6 +5,8 @@ Miri is a Raspberry Pi-based personal assistant, controlled by voice, that speci
 
 Think Siri + Music (Miri).
 
+See it in action here: http://goo.gl/jBoJj
+
 ## Requirements
 
 You will need:
