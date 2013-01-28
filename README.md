@@ -26,6 +26,16 @@ finally, checkout the project:
 
     git clone git@github.com:AaronRandall/miri.git
 
+and modify:
+
+    miri/lib/miri/app_config.rb
+
+to include API keys for each service.  You can sign-up to get API keys from:
+
+* http://www.songkick.com/api_key_requests/new
+* https://developer.wolframalpha.com/portal/apisignup.html
+* https://developer.echonest.com/account/register
+
 ## Usage
 
 Run:
