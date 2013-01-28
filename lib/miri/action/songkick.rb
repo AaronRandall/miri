@@ -7,7 +7,6 @@ module Miri
     class Songkick < BaseAction
       
       USER_EVENT_URI="http://api.songkick.com/api/3.0/users/"
-      SONGKICK_USER_ID="aaronrandall"
 
       def process(artist_text)
         event = perform_query
