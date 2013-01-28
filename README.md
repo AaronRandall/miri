@@ -5,7 +5,9 @@ Raspberry Pi + Music + Siri
 
 ## Usage
 
-run "bin/miri"
+Run:
+
+  bin/miri
 
 Say something! e.g.
 
@@ -17,5 +19,9 @@ Say something! e.g.
 
 ## Other stuff
 
-Run "bin/miri_with_detection" to allow for detecting audio (e.g. "Hello Miri!"),
+Run:
+
+bin/miri_with_detection
+
+to allow for detecting audio (e.g. "Hello Miri!"),
 and automatically starting Miri.
