@@ -1,3 +1,4 @@
+require_relative 'base_action' 	
 require 'net/http'
 require 'json'
 require 'nokogiri'
@@ -5,11 +6,13 @@ require 'nokogiri'
 module Miri
   module Action
     class WolframAlpha < BaseAction
+
+      APP_ID="U3TR8A-553KQ7G3RK"
+      QUERY_URI="http://api.wolframalpha.com/v2/query"
+
       def process(artist_text)
         @search_text = artist_text
-        Logger.debug("In the WolframAlpha action with search term: #{@search_text}")
         result = perform_query
-
         Miri::TextToSpeech.say(result)
       end
 
@@ -22,7 +25,7 @@ module Miri
       def perform_query
         result = ""
 
-        uri = URI("http://api.wolframalpha.com/v2/query?input=#{URI.escape(@search_text)}&appid=U3TR8A-553KQ7G3RK")
+        uri = URI("#{QUERY_URI}?input=#{URI.escape(@search_text)}&appid=#{APP_ID}")
         response = Net::HTTP.get_response(uri)
 
         begin
@@ -39,4 +42,3 @@ module Miri
     end
   end
 end
-

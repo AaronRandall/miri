@@ -1,3 +1,4 @@
+require_relative 'base_action' 	
 require 'net/http'
 require 'json'
 
@@ -5,13 +6,12 @@ module Miri
   module Action
     class Songkick < BaseAction
       
+      API_KEY="hackday"
+      USER_EVENT_URI="http://api.songkick.com/api/3.0/users/"
       SONGKICK_USER_ID="aaronrandall"
 
       def process(artist_text)
-        Logger.debug("In the Songkick action")
         event = perform_query
-        Logger.debug("Event retrieved: #{event}")
-
         Miri::TextToSpeech.say(event)
       end
 
@@ -32,7 +32,7 @@ module Miri
       private
 
       def perform_query
-        uri = URI("http://api.songkick.com/api/3.0/users/#{SONGKICK_USER_ID}/events.json?apikey=hackday")
+        uri = URI("#{USER_EVENT_URI}#{SONGKICK_USER_ID}/events.json?apikey=#{API_KEY}")
         response = Net::HTTP.get_response(uri)
 
         begin

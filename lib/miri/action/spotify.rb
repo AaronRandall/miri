@@ -1,3 +1,5 @@
+require_relative 'base_action' 	
+
 module Miri
   module Action
     class Spotify < BaseAction
@@ -7,11 +9,19 @@ module Miri
       
       def process(artist_text)
         @artist_text = artist_text
-
-        Logger.debug("In Spotify process with #{artist_text}")
         ensure_mpd_is_running
         play_track_for_artist
       end
+
+      def keywords
+        [
+          'play some music by', 
+          'play a track by', 
+          'play'
+        ]
+      end
+
+      private
 
       def play_track_for_artist
         clear_playlist
@@ -29,12 +39,6 @@ module Miri
           Miri::TextToSpeech("I'm sorry, I couldn't find a track for #{@artist_text}")
         end
       end
-
-      def keywords
-        ['play some music by', 'play a track by', 'play']
-      end
-
-      private
 
       def find_track
         search_result = `mpc find any "#{@artist_text}" | grep -m 1 "track"`
@@ -62,4 +66,4 @@ module Miri
       end
     end
   end
-end  
+end

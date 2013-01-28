@@ -1,17 +1,11 @@
+require_relative 'action/echonest' 	
+require_relative 'action/spotify' 	
+require_relative 'action/songkick' 	
+require_relative 'action/wolframalpha' 	
+
 module Miri
   module Action
-    class BaseAction
-      def process(artist_text)
-        raise NotImplementedError
-      end
-
-      def keywords
-        raise NotImplementedError
-      end
-    end
-
     class Agent
-
       def initialize(action_text)
         @action_text = action_text 
       end
@@ -19,18 +13,18 @@ module Miri
       def process
         action_class = find_action_class
         if action_class
-          artist_text = artist_text_exists_in_action_text(action_class.keywords) 
+          action_text = action_text_exists_in_action_text(action_class.keywords) 
 
           Logger.debug("Action class retrieved: #{action_class}")
-          Logger.debug("Artist text retrieved : #{artist_text}")
+          Logger.debug("Artist text retrieved : #{action_text}")
         else
           # Try the request on WolframAlpha if no specific action class was found
           action_class = Miri::Action::WolframAlpha.new
-          artist_text = @action_text
+          action_text = @action_text
         end
 
         Logger.info("I'm going to use #{action_class.class.name.split('::').last} to answer your question")
-        action_class.process(artist_text)
+        action_class.process(action_text)
       end
 
       private
@@ -47,20 +41,19 @@ module Miri
       end
 
       def keyword_exists_in_action_text(keywords)
-        if artist_text_exists_in_action_text(keywords)
+        if action_text_exists_in_action_text(keywords)
           return true
         end
 
         return false
       end
 
-      def artist_text_exists_in_action_text(keywords)
+      def action_text_exists_in_action_text(keywords)
         keywords.each do |keyword|
           Logger.debug("Checking keyword #{keyword} against action_text #{@action_text}")
           if starts_with?(@action_text, keyword)
-            Logger.debug("Subtracting @action_text: #{@action_text} from keyword:#{keyword}")
-            artist_text = @action_text.gsub(keyword, "")
-            return artist_text
+            action_text = @action_text.gsub(keyword, "")
+            return action_text
           end
         end
 

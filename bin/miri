@@ -2,20 +2,15 @@
 
 require File.expand_path('../../lib/miri', __FILE__)
 
-miri = Miri::Agent.new()
+MAX_ATTEMPTS = 2
 
-MAX_ATTEMPTS=2
 translated_text = ""
 current_attempt = 1
 
-#translated_text = "tell me about the rolling stones"
-#translated_text = "tell me about eric clapton"
-#translated_text = "play a track by the rolling stones"
-#translated_text = "what is my next gig"
-#translated_text = "what is the largest mammal on earth"
+miri = Miri::Agent.new()
 
 while translated_text == "" && current_attempt <= MAX_ATTEMPTS
-  audio_file      = miri.capture_audio()
+  audio_file = miri.capture_audio
   translated_text = miri.translate_to_text(audio_file)
   current_attempt += 1
 end

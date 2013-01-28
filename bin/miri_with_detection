@@ -4,9 +4,10 @@ NOISE_SAMPLE_RATE = 0.02
 RECORD_RATE_SECONDS = 1
 
 while true
-  mean_sample_rate_string = `/usr/bin/arecord -D plughw:1,0 -d #{RECORD_RATE_SECONDS} -f S16_LE > sample.wav && /usr/bin/sox -t .wav sample.wav -n stat 2>&1 | grep norm`
-  mean_sample_rate = mean_sample_rate_string.split[2].to_f
-  puts "Mean sample rate=#{mean_sample_rate}"
+  sample_rate_info = `/usr/bin/arecord -D plughw:1,0 -d #{RECORD_RATE_SECONDS} -f S16_LE > sample.wav && /usr/bin/sox -t .wav sample.wav -n stat 2>&1 | grep norm`
+  `rm sample.wav`
+
+  mean_sample_rate = sample_rate_info.split[2].to_f
   if mean_sample_rate > NOISE_SAMPLE_RATE
     system "/home/pi/src/miri/bin/miri"
   end
