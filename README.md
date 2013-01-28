@@ -1,9 +1,13 @@
 miri
 ====
 
-Miri is a Raspberry Pi-based personal assistant, controlled by voice, that specialises in answering music-related questions.
+Miri is a Raspberry Pi-based personal assistant, controlled by voice, that specialises in answering music-related questions, e.g.
 
-Think Siri + Music (Miri).
+* "Tell me about The Rolling Stones"
+* "Play The Knife"
+* "What is my next concert?"
+* "When did The Beatles break up?"
+* "What frequencies can a violin sound?"
 
 See it in action here: http://goo.gl/jBoJj
 
