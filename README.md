@@ -1,7 +1,30 @@
 miri
 ====
 
-Raspberry Pi + Music + Siri
+Miri is a Raspberry Pi-based personal assistant, controlled by voice, that specialises in answering music-related questions.
+
+Think Siri + Music (Miri).
+
+## Requirements
+
+You will need:
+
+* A Raspberry Pi (running the "soft-float" debian, available from "http://www.raspberrypi.org/downloads")
+* USB mic (I used a webcam)
+
+## Installation
+
+Install a bunch of stuff:
+
+    sudo apt-get install git ncmpcpp mopidy ruby ffmpeg ruby-dev mplayer sox libcurl4-openssl-dev libcurl4-gnutls-dev
+
+and then install Mopidy:
+
+    http://docs.mopidy.com/en/latest/installation/raspberrypi/#how-to-for-debian-7-wheezy
+
+finally, checkout the project:
+
+    git clone git@github.com:AaronRandall/miri.git
 
 ## Usage
 
@@ -11,11 +34,11 @@ Run:
 
 Say something! e.g.
 
-* Tell me about The Rolling Stones
-* Play The Rolling Stones
-* What is my next concert?
-* When did The Beatles break up?
-
+* "Tell me about The Rolling Stones"
+* "Play The Knife"
+* "What is my next concert?"
+* "When did The Beatles break up?"
+* "What frequencies can a violin sound?"
 
 ## Other stuff
 
@@ -23,5 +46,4 @@ Run:
 
     bin/miri_with_detection
 
-to allow for detecting audio (e.g. "Hello Miri!"),
-and automatically starting Miri.
+to allow for detecting audio (e.g. "Hello Miri!"), and automatically start Miri (hands-free, instead of having to manually run bin/miri).
