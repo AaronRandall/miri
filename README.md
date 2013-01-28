@@ -24,7 +24,7 @@ and then install Mopidy:
 
     http://docs.mopidy.com/en/latest/installation/raspberrypi/#how-to-for-debian-7-wheezy
 
-finally, checkout the project:
+checkout the project:
 
     git clone git@github.com:AaronRandall/miri.git
 
