@@ -6,7 +6,6 @@ module Miri
   module Action
     class Songkick < BaseAction
       
-      API_KEY="hackday"
       USER_EVENT_URI="http://api.songkick.com/api/3.0/users/"
       SONGKICK_USER_ID="aaronrandall"
 
@@ -32,7 +31,7 @@ module Miri
       private
 
       def perform_query
-        uri = URI("#{USER_EVENT_URI}#{SONGKICK_USER_ID}/events.json?apikey=#{API_KEY}")
+        uri = URI("#{USER_EVENT_URI}#{SONGKICK_USER_ID}/events.json?apikey=#{SONGKICK_API_KEY}")
         response = Net::HTTP.get_response(uri)
 
         begin

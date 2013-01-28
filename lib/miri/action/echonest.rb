@@ -6,7 +6,6 @@ module Miri
   module Action
     class EchoNest < BaseAction
 
-      API_KEY='YP3SF1D1HUU0YALC5'
       BIO_URI='http://developer.echonest.com/api/v4/artist/biographies'
       BIO_MAX_LENGTH_CHARS=500
       BIO_MAX_SENTENCES=1
@@ -33,7 +32,7 @@ module Miri
       def perform_query
         bio = ""
 
-        uri = URI("#{BIO_URI}?api_key=#{API_KEY}&name=#{URI.escape(@artist_text)}&format=json&results=1&start=0&license=cc-by-sa") 
+        uri = URI("#{BIO_URI}?api_key=#{AppConfig::ECHONEST_API_KEY}&name=#{URI.escape(@artist_text)}&format=json&results=1&start=0&license=cc-by-sa") 
         response = Net::HTTP.get_response(uri)
 
         begin

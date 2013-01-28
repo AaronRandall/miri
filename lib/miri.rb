@@ -1,3 +1,5 @@
+require_relative 'miri/app_config'
+
 module Miri
   ROOT = File.expand_path('..', __FILE__)
   require ROOT + '/miri/logger'

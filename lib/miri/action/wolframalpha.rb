@@ -7,7 +7,6 @@ module Miri
   module Action
     class WolframAlpha < BaseAction
 
-      APP_ID="U3TR8A-553KQ7G3RK"
       QUERY_URI="http://api.wolframalpha.com/v2/query"
 
       def process(artist_text)
@@ -25,7 +24,7 @@ module Miri
       def perform_query
         result = ""
 
-        uri = URI("#{QUERY_URI}?input=#{URI.escape(@search_text)}&appid=#{APP_ID}")
+        uri = URI("#{QUERY_URI}?input=#{URI.escape(@search_text)}&appid=#{WOLFRAM_ALPHA_APP_ID}")
         response = Net::HTTP.get_response(uri)
 
         begin
